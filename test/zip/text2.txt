@@ -1,0 +1,11 @@
+ Volume in drive C has no label.
+ Volume Serial Number is D833-AEFA
+
+ Directory of C:\GTools\tools\dc4w\test\zip
+
+02/12/2006  18:25    <DIR>          .
+02/12/2006  18:25    <DIR>          ..
+01/12/2006  01:27                17 text1.txt
+02/12/2006  18:25                 0 text2.txt
+               2 File(s)             17 bytes
+               2 Dir(s)  171,041,202,176 bytes free

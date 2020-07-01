@@ -1,0 +1,34 @@
+﻿Build started 08/08/2013 17:37:59.
+Project "C:\GTools\tools\dc4w\izuz\izuz.vcxproj" on node 2 (build target(s)).
+InitializeBuildStatus:
+  Creating "Debug\izuz.unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  All outputs are up-to-date.
+Lib:
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\GTools\tools\dc4w\Debug\izuz.lib" /NOLOGO Debug\iz_api.obj
+  Debug\iz_crc32.obj
+  Debug\iz_crctab.obj
+  Debug\iz_crpt.obj
+  Debug\iz_envargs.obj
+  Debug\iz_explode.obj
+  Debug\iz_extract.obj
+  Debug\iz_fileio.obj
+  Debug\iz_globals.obj
+  Debug\iz_inflate.obj
+  Debug\iz_list.obj
+  Debug\iz_match.obj
+  Debug\iz_nt.obj
+  Debug\iz_process.obj
+  Debug\iz_ttyio.obj
+  Debug\iz_unzip.obj
+  Debug\iz_win32.obj
+  Debug\iz_zipinfo.obj  /LTCG 
+  izuz.vcxproj -> C:\GTools\tools\dc4w\Debug\izuz.lib
+FinalizeBuildStatus:
+  Deleting file "Debug\izuz.unsuccessfulbuild".
+  Touching "Debug\izuz.lastbuildstate".
+Done Building Project "C:\GTools\tools\dc4w\izuz\izuz.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.37

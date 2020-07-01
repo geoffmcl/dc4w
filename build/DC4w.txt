@@ -1,0 +1,356 @@
+
+// DC4w.txt
+// this is public domain software - praise me, if ok, just don't blame me!
+
+// This is mainly programmer notes, as 'fixes', 'changes' are done.
+
+// FIX20120116 - Have OPTION when writing a LIST, especially full compare, and ignore binary...
+// maybe -ofid - [F]ull compare - [I]gnore binary - [D]ate ignore - ...
+#define  VER_DATE    "16 January, 2012"  // FIX20120116
+#define  MakeNumber  50  // in sync with upd.bat and version info ...
+How to set 'Full File Compare'? Is IDM_OPTEXACT - Do_IDM_OPTEXACT
+   ToggleBool( &gbExact, &bChgExa, !gbExact );
+   Do_FULL_REFRESH();
+But part of this is HOW to handle BINARY files
+In the scan, if a zero found in file data, then add flag ff_found_zero
+and add ci->ci_dwFlag |= TT_GOTZERO;
+
+// FIX20091224 - it seems with -r-, it STILL scans _ALL_ subdirectories
+It sets -
+  ta->fDeep = FALSE;
+  ta->fShall = TRUE;
+Situation SEEMS confused, so added a GLOBAL variable, and REMOVED the 
+above ...
+
+// FIX20091125 - if -xdall, etc, then save and OFF, bNoExcludes
+// and add INCLUDE_TAGS check box to IDD_SAVELIST2
+#define  VER_DATE    "25 November, 2009"  // FIX20091125
+#define  MakeNumber  44  // in sync with upd.bat and version info ...
+
+// FIX20090128
+Copy/update problem when the destination has READ ONLY attribute. NO, maybe
+due there being a file already there equal to the directory name to be
+created - YUK! This file would need to be deleted, to allow the 'new'
+directory to be created.
+
+// FIX20081125
+Added gbIgnDT2, gbChgIDT2 to REALLY IGNORE FILE DATE/TIME COMPLETELY
+
+// 2008.07.14
+// FIX20080728 - added dc4wDel1.c module, new function IDM_DELETELEFTFILE added
+(a) Add a FILE DELETE function, especially if the file is LEFT ONLY type, but
+ maybe it should exist for other selected files
+
+(b) Remember the DIRECTORY from where a file was LOADED, but more importantly
+ the directory where the LAST save was made ...
+
+// FIX20071020 - check if EACH directory component is IN g_sInDirs
+That is, if -I:d:<directory> sets up an INCLUDE THIS ONLY list
+and added -i:[d|f]:@inputfile or ';' separated list of file or directories
+NOTE: Also found, and compiled the original sample - now samples/sdkdiff
+
+// FIX20070525 another small change ...
+Allow it is the SAME TIME, if Year, Month, Day, Hour are the SAME,
+and Minutes = +-1 minutes
+added 'Exclude' to expanded context menu
+dc4wDlg.c - added bDlg_XChg = TRUE;  to show changed one of the LISTS
+
+// FIX20070509 small change in DATE compare, with gbIgnDT on
+#define  MakeNumber  37  // jumped 2 numbers to sync with upd.bat file ...
+#define  VER_DATE    "9 May, 2007"  
+see LONG  CompFTOne( LONG lg, FILETIME * pft1, FILETIME * pft2 )
+in compitem.c
+
+// FIX20060917 - add Alt+? brief help dialog - show_help()
+#define  MakeNumber  31
+#define  VER_DATE    "17 September, 2006"
+
+// FIX20060823 -xdfp: to EXCLUDE FrontPage (hidden) folders
+#define  MakeNumber  30
+#define  VER_DATE    "23 August, 2006"
+
+FIX20060709 - Add -I:D:<dirname/mask> and -I:F:<filename/mask>
+
+FIX20060324 - Allow a COPY to be done to an ALTERNATE folder ... if a VALID
+folder is entered, then perform the COPY to that folder ... quite
+DANGEROUS, since no view, or compare of all the files has been done,
+but it is there now ...
+
+FIX20060219 - Add a ZIP option to menu, like in the dialog, and add dialog to show
+results of the zip ... also improved AddInfo() to add folders FIRST, then files ...
+
+FIX20060216 - remove automatic expansion when only ONE difference!
+
+FIX20060126 - added menu item to list full path name, relative name,
+or just file title, and add -xf:@input list or -xd:@input.file.list
+
+FIX20051222 - Reverse logic on ZIPPING - presently defaults ON, and -N to stop
+So, keep -n to say NO ZIP, but -n+ or -na (all) will cause a ZIP to be written
+But first it appears the ZIPPING FAILED anyway ...
+Ok, that was a BAD OLD command
+// #define  DEF_ZIP_CMD2 "c:\\mdos\\Zip8.bat -a -P -o -x@d:\\temp\\TEMPEXCL.TXT TEMPZ001.zip @tempz001.lst"
+#define  DEF_ZIP_CMD2 "c:\\mdos\\Zip8.bat -a -P -o -x@c:\\windows\\temp\\TEMPEXCL.TXT TEMPZ001.zip @tempz001.lst"
+And, what about this AutoZIP?
+REMOVE UNUSED -
+// BOOL  g_bWriteAZip = FALSE;   // to actually WRITE zip = NOT PRESENTLY USED
+
+FIX20051212 - dc4wUtil/WildComp2() - Somehow an ERROR crept into here - fixed
+
+FIX20051204 input of \data\entries*.* now find Entries and Entries.log!!! FIXED
+AND need multiple FileIn masks, like Repository and Root, to remove CVS stuff alone
+Use input -I<mask> or -I<file> = DONE
+
+// FIX20051203 - allow a file mask to be added on input
+// FIX20051203 - MSVC7.1 - Allow like an OPT-IN mask, like ...\data\Temp*
+This is the OPPOSITE to the EXCLUDE mask - ONLY file matching this in mask
+are found, loaded, and compared ... obviously such an opt-in mask MUST be the
+same for left and right sides ... presently get ERROR FIRST ITEM
+ALL DONE - UPD.BAT to verion zip 32 ...
+
+// FIX20051105 - MSVC7.1 - Show, and be able to DISABLE EXCLUDED - *eXc=nnn*
+In comlist.c, the function VOID complist_showstats( VOID ) ouputs -
+   DWORD    dwm = getmisscnt();
+   if( dwm ) sprintf(EndBuf(g_szListStg), " *eXc=%d*", dwm );
+   if( g_SameExa ) sprintf(EndBuf(g_szListStg), " *Exa=%d*", g_SameExa );
+The function, in scandir.c, DWORD getmisscnt( VOID ) { // returns
+   return( g_xtotal + g_xdupes );   // the GRAND total }
+These are defined as -
+#define  g_xtotal (*g_pms).dwtotal
+#define  g_xdupes (*g_pms).dwdupes
+which are part of the structure -
+typedef struct tagMSDSTATS {
+   DWORD dwtotal; // total files in list
+   DWORD dwdupes; // files with same relative names
+   ...
+I want to (a) display the RULES used to gather these totals, AND
+be able to DISABLE it, and redo the view ...
+The g_xtotal is incremented in the function 
+VOID  dir_add2missedfiles( DIRECT dir, LPTSTR path, PFD pfd )
+This function is CALLED from TWO (2) places, in the function
+BOOL  NotInXDL( DIRECT dir, LPTSTR name, PFD pfd )
+and TWO(2) times in the function
+VOID  dir_addfile2(DIRECT dir, LPSTR path, PFD pfd) {
+   DIRITEM  pfile;
+   PLE      pH = &gsXFileList;   // the EXCLUDE file list
+   if( !IsListEmpty(pH) ) {
+      if( Match2XList( pH, path, IS_FILE ) ) { // if it IS IN THE LIST
+         dir->dwFilsExcl++;   // count an EXCLUDED
+         dir_add2missedfiles( dir, path, pfd );
+         return;  // all done } }
+   if( gbExclude ) { // if we have an ACTIVE exclude LIST
+      if( MatchesExclude( path, IS_FILE ) ) {
+         dir->dwFilsExcl++;   // count an EXCLUDED
+         dir_add2missedfiles( dir, path, pfd );
+         return;  // all done } }
+   // else ADD this file to the VIEW LIST
+This function is called during the SCAN of a directory -
+DIRLIST dir_buildlist(LPSTR path, BOOL bOnDemand, DWORD dwFlg )
+and from the main function -
+void dir_scan(DIRECT dir, BOOL bRecurse, INT level)
+and its zip-mate function -
+VOID  dir_scan_zip(DIRECT dir, BOOL bRecurse)
+During this SCAN of a DIRECTORY, a DIRECTORY can be EXCLUDED by
+  if( NotInXDL(dir, name, pfd) ) {
+     dir_adddirect(dir, name, pfd, FALSE);
+  } else { dir->dwDirsExcl++; } // count an EXCLUDED directory
+
+So there are THREE function that CHECK EXCLUSIONS
+1. if( Match2XList( pH, path, IS_FILE ) ) { // if it IS IN THE LIST
+2. if( MatchesExclude( path, IS_FILE ) ) {
+3. if( NotInXDL(dir, name, pfd) ) {
+1. Match2XList uses PLE pH = &gsXFileList; // the EXCLUDE file list
+2. MatchesExclude uses pH = &gsExclLists[i]; // select the correct user list of EXCLUDES
+3. NotInXDL uses PLE pH = &gsXDirsList;
+   then calls return( Match2XList( pH, lpf, ftyp ) );
+THUS it appears there are THREE(3) RULES of EXCLUSION -
+&gsXFileList; &gsExclLists[i]; &gsXDirsList;
+Thus returning a VIEW of the EXCLUSION RULES seems a simple DISPLAY of
+these THREE(3) structures, and to CANCELL exclusion, the addition of a
+GLOBAL flag bNoExcludes as ON or OFF ...
+And it may be good to be able to AMEND these lists ...
+It is NOTED that when a file is ADDED to the exclude list, if it is in both
+the left, and the right sides, then *eXc=<double the number> - not good!
+It SEEMS the files excluded during runtime can be changed, and even removed
+by adding <blank> in the EDIT / VIEW - it appears I have ADDED a 17 and 18
+to the 16 exclude-list pads ... messy, but functional ...
+In dc4wDlg.c, the dialog IDD_DLG_EXCLUDE[2] list box is filled with -
+   for( i = 0; i < MXXLSTS; i++ ) {
+      pH = &gsExclLists[i];
+MXXLSTS being defined as 16 ...
+Then the 17th line comes from -
+   pH = &gsXFileList;   // the EXCLUDE FILE LIST
+And the 18th line filled with
+   pH = &gsXDirsList; // = EXCLUDE these DIRECTORIES -xd:Scenery
+And selecting one of these lines, allows an EDIT of that line ... the EDIT
+does not work if blanked, but ok if say <blank> added, but then <blank>
+stays ... have added some code, and an info prompt, to fix this ...
+Finally, to INCLUDE ALL EXCLUDED WITHOUT DESTROYING, or modifying the LISTS ...
+   // ID_VIEW_NOEXCLUDES
+   ToggleBool( &bNoExcludes, &bChgNoExcl, !bNoExcludes );
+*ALL DONE*
+
+FIX20051024 - using MSVC7.1 - Add update selected file, in right click context menu
+I find the code has been excluded by the flag -
+#undef DONEUPDCHK2 // this was supposed to be a FAST one file update (L->R)
+but can NOT see WHY NOW????
+Changed to -
+#define DONEUPDCHK2 // a FAST one file update (L->R)
+Also check the SAVE FILE LIST dialog, to get NEXT numbered file ...
+which is IDD_SAVELIST ... in dc4wDlg sl_WM_INITDIALOG 3251 ...
+We may start with an INI list, like -
+[FileLists]
+List1=c:\GTools\Tools\dc4w\TEMPL002.TXT
+List2=c:\GTools\Tools\dc4w\TEMPL001.TXT
+BUT, (a) these may ALREADY exist, thus we should generate a NEW, since
+there is a COMBO list to choose from, or (b) we could be in ANOTHER
+folder ... assume the LIST is to be put where DC4W was run from ...
+The invoking of the DIALOG starts at -
+DWORD complist_savelist(COMPLIST cl, LPSTR savename, UINT options) // = IDM_SAVELIST
+The LIST is passed into the dialog, through -
+   pcfds->cf_sTARGS.ta_sDI.di_pDFList = &gsFileList;  // list file list
+The 'current' out file in -
+   LPTSTR poutfile = &pcfds->cf_sTARGS.ta_sDI.di_szFile[0];
+ALSO, the last known LIST file is also in the INI
+ListFile=c:\GTools\Tools\dc4w\TEMPL002.TXT
+and this is placed in the poutfile ... confusing, and complicated!!!
+If we are to write a LIST, and EXIT, by giving a list file ON the command
+line, then comlist_savelist(...) is PASSED this LIST FILE,
+but if the call comes from IDM_SAVELIST menu item, then this is NULL!
+The sl_dialog initialisation uses -
+   ph = pcfds->cf_sTARGS.ta_sDI.di_pDFList;
+   lpf = &pcfds->cf_sTARGS.ta_sDI.di_szFile[0];
+Added, and re-arranged some code, which should do it ...
+         } else { // we HAVE a last USED, but (a) is it the same path, and
+             // (b) does it ALREADY exist
+             SplitFN(lpb, lpb2, poutfile); // prepared to mess with it
+             if( strcmpi(lpss, lpb) ) {
+                 // different PATH
+                 strcpy(poutfile, lpss); // use the CURRENT PATH
+                 strcat(poutfile, lpb2);
+             }
+         }
+         GetNxtDif(poutfile);   // bump to NEXT non-existant file
+
+Problem: When first enter expanded mode, sometimes the second column,
+containing the '<!' etc, chars, is TOO WIDE. It is 'fixed' if
+one of the 'display' options, like IDM_SHOWSAME, is toggled ...
+
+Such 'toggles', and many others call
+ 'void view_changeviewoptions(current_view)'
+ which calls -
+  /* make the new mapping */
+ view_expand_item(view, view->ciSelect);
+
+It seems it was to do with 'timing' - the services that chooses
+the column widths relied solely on -
+long do_getprops(HWND hwnd, lpColPropsList propslist) in dc4w.c
+used - if( DisplayMode == MODE_EXPAND ) - but I added -
+
+
+
+FIX20050129 - re-compile in .NET 2003 - and fixes
+Default Libraries
+LIBCMTD.LIB oldnames.lib comctl32.lib odbc32.lib odbccp32.lib
+reduced to
+comctl32.lib
+
+and had some trouble with the Browse.cpp module - tried to make a
+browse2.c, but you can not have 'shell' functions, without afx.h,
+the C++ implementation ...
+
+Removed some API 'replacement' code, since this should now be all UNICODE
+#ifdef ADD_DBCS_FUNCS2 // FIX20050129 - using MSVC7 .NET 2003
+
+Looked at gbExact (load and compare exact data) ... this was NOT being
+done when the SIZE of the files were different ... tis ignores hte case
+where the line data is EXACTLY the same, and the ONLY difference in
+the files is the file endings ... fixed in compitem.c, with -
+            // they are NOT the same size
+            // ##########################
+            // but, for example, due to line endings CR|CRLF|LF ...
+            // they could actually be the SAME FILE ********** FIX20050129 - line ending!
+            if( li1.QuadPart < li2.QuadPart )
+               ci->ci_dwFlag |= TT_SMALLER;    // left is smaller
+            else
+               ci->ci_dwFlag |= TT_LARGER;    // left is larger
+
+            // but only if EXACT is in use - Mch2002
+            if( gbExact ) {  // IDM_OPTEXACT - full line by line compare
+               ci->state = compitem_exact( ci );   // load, and compare data, line by line
+            } else {
+               ci->state = STATE_DIFFER;
+            }
+That is, if gbExact is ON, do compitem_exact(ci) = load data, hash lines, compare
+
+Also in file.c, commented out the 'second' file close -
+   readfile_delete(fbuf);
+   // dir_closefile(fd->diritem, fh);
+since, readfile_delete(fbuf) ALSO closes the file handle
+
+
+********************************************************************
+
+Various items -
+
+Overall Description
+
+DC4w will compare the files in any two directories.
+The default is to recursivly search all sub-directories.
+
+The compare of file will yield one of four (4) states -
+STATE_SAME   - Same size, date, time
+STATE_DIFFER - Not above, and is divided into
+   Smaller|Same|Larger - reported byte size
+   Newer|Same|Older    - Date/Time of file
+and of course the inevitatable
+STATE_FILELEFTONLY, and
+STATE_FILERIGHTONLY.
+
+The list of files is displayed in what is call OUTLINE
+mode, and paints each line different colours, according
+to the state. Which of the 'states', or 'enhanced' states
+is displayed in the file list is controlled by what is
+internally called outline_include.
+
+This is a bit flag, containing one or more of the
+following 'enhanced states'
+INCLUDE_SAME  - that can sometimes be a BIG list
+INCLUDE_DIFFER - sub-divided into INCLUDE_NEWER &| INCLUDE_OLDER
+And of course - INCLUDE_LEFTONLY &| INCLUDE_RIGHTONLY
+
+Perhaps a little confusing at first, but comes clear with
+study is that many of the same 'states', and outline view
+bits are re-used when DC4w actually compares the lines
+in two files, and displays a composite view of the result.
+
+The compare of two lines in corresponding files from the left
+and right folders yields the following six (6) states -
+STATE_SAME   - Line are equal, but take some care. This is 'equal'
+after applying some conditions, like ignore blanks, ignore line
+endings, and others that may be added. So it is not always
+exactly the same!
+STATE_DIFFER - Not the above. This needs to be further divided
+into how different, and in the present implementation is not used.
+STATE_LEFTONLY - line only in left file
+STATE_RIGHTONLY - line only in right file
+and the enigmatic
+STATE_MOVEDLEFT - this is the left file version of the line
+STATE_MOVEDRIGHT - this is the right file version of the same line
+
+When any line in the 'list of files' is selected, and the
+display mode switched to what is called EXPANDED, you see the
+list of line in each file display according to some bit
+rules -
+INCLUDE_SAME - remembering that 'same' does not always means 'equal'
+Only found in one side ot the other
+INLCUDE_RIGHTONLY &| INCLUDE_LEFTONLY
+And this 'interesting' moved -
+INCLUDE_MOVELEFT &| INCLUDE_MOVERIGHT
+
+It should be noted that STATE_MARKED is used only in the left or
+right sections, to denote the line is matched to somewhere, but
+is not the final state of the item.
+
+
+*** TBD *** complete description
+

@@ -1,0 +1,41 @@
+
+ Volume in drive D is GEOFF7     
+ Volume Serial Number is 1169-17DC
+ Directory of D:\GTools\Tools\dc4w\tabctrl
+
+.              <DIR>        03/12/01  13:40 .
+..             <DIR>        03/12/01  13:40 ..
+README   TXT         3,597  03/12/01  13:45 ReadMe.txt
+STDAFX   CPP           209  03/12/01  13:45 StdAfx.cpp
+RES            <DIR>        03/12/01  13:45 res
+DEBUG          <DIR>        03/12/01  13:45 Debug
+TABCTRL  DEP           346  03/12/01  13:45 TabCtrl.dep
+OUTPG    H           1,279  03/12/01  23:57 OutPg.h
+TEMP           <DIR>        08/12/01  14:15 temp
+TCLOG    CPP         7,638  08/12/01  16:31 TCLog.cpp
+OUTPG    CPP         1,113  08/12/01  16:37 OutPg.cpp
+TABCTRL  H           1,393  08/12/01  17:29 TabCtrl.h
+EXPPAG   H           1,239  08/12/01  18:33 ExpPag.h
+EXPPAG   CPP         1,528  08/12/01  18:33 ExpPag.cpp
+RELEASE        <DIR>        08/12/01  18:33 Release
+TCVERS   H             425  10/12/01  11:32 TCVers.h
+TCLOG    H             588  10/12/01  12:07 TCLog.h
+TABCTR~1 H           1,363  10/12/01  13:41 TabCtrlDlg.h
+TABCTR~1 CPP         3,268  10/12/01  13:43 TabCtrlDlg.cpp
+TABSHEET CPP         8,785  10/12/01  14:00 TabSheet.cpp
+TABSHEET H           1,544  10/12/01  14:03 TabSheet.h
+TABCTRL  RC          9,817  10/12/01  14:07 TabCtrl.rc
+RESOURCE H           1,648  10/12/01  14:07 resource.h
+TCINI    H             436  10/12/01  14:43 TCIni.h
+STDAFX   H           1,513  10/12/01  17:49 StdAfx.h
+COMPPG   H           1,409  10/12/01  18:06 CompPg.h
+COMPPG   CPP         4,459  10/12/01  18:11 CompPg.cpp
+TCWORK   H          16,712  10/12/01  18:53 TCWork.h
+TABCTRL  CPP         7,612  10/12/01  19:32 TabCtrl.cpp
+TC       INI         1,058  10/12/01  19:53 TC.INI
+TCINI    CPP        53,328  10/12/01  19:57 TCIni.cpp
+TABCTRL  MAK         6,589  10/12/01  20:23 TabCtrl.mak
+TABCTRL  DSP         5,057  10/12/01  20:23 TabCtrl.dsp
+TABCTRL  CLW         2,750  12/12/01  10:04 TabCtrl.clw
+        28 file(s)        146,703 bytes
+         6 dir(s)        4,071.08 MB free

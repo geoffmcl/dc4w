@@ -1,0 +1,35 @@
+﻿Build started 08/08/2013 18:08:51.
+Project "C:\GTools\tools\dc4w\izuz\izuz.vcxproj" on node 2 (build target(s)).
+InitializeBuildStatus:
+  Creating "Release\izuz.unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  All outputs are up-to-date.
+Lib:
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\GTools\tools\dc4w\Release\izuz.lib" /NOLOGO Release\iz_api.obj
+  Release\iz_crc32.obj
+  Release\iz_crctab.obj
+  Release\iz_crpt.obj
+  Release\iz_envargs.obj
+  Release\iz_explode.obj
+  Release\iz_extract.obj
+  Release\iz_fileio.obj
+  Release\iz_globals.obj
+  Release\iz_inflate.obj
+  Release\iz_list.obj
+  Release\iz_match.obj
+  Release\iz_nt.obj
+  Release\iz_process.obj
+  Release\iz_ttyio.obj
+  Release\iz_unzip.obj
+  Release\iz_win32.obj
+  Release\iz_zipinfo.obj
+  iz_zipinfo.obj : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
+  izuz.vcxproj -> C:\GTools\tools\dc4w\Release\izuz.lib
+FinalizeBuildStatus:
+  Deleting file "Release\izuz.unsuccessfulbuild".
+  Touching "Release\izuz.lastbuildstate".
+Done Building Project "C:\GTools\tools\dc4w\izuz\izuz.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.35

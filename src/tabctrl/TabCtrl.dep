@@ -1,0 +1,22 @@
+# Microsoft Developer Studio Generated Dependency File, included by TabCtrl.mak
+
+.\StdAfx.cpp : \
+	".\StdAfx.h"\
+	
+
+.\TabCtrl.cpp : \
+	".\StdAfx.h"\
+	".\TabCtrl.h"\
+	".\TabCtrlDlg.h"\
+	
+
+.\TabCtrl.rc : \
+	".\res\TabCtrl.ico"\
+	".\res\TabCtrl.rc2"\
+	
+
+.\TabCtrlDlg.cpp : \
+	".\StdAfx.h"\
+	".\TabCtrl.h"\
+	".\TabCtrlDlg.h"\
+	

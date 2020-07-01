@@ -1,0 +1,11 @@
+ Volume in drive C is DRIVEC-D1
+ Volume Serial Number is D833-AEFA
+
+ Directory of C:\GTools\tools\dc4w\test\dir2
+
+17/11/2009  13:56    <DIR>          .
+17/11/2009  13:56    <DIR>          ..
+17/11/2009  13:53               343 file.txt
+17/11/2009  13:56                 0 file2.txt
+               2 File(s)            343 bytes
+               2 Dir(s)  18,379,644,928 bytes free

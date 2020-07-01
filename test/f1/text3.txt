@@ -1,0 +1,11 @@
+ Volume in drive C has no label.
+ Volume Serial Number is D833-AEFA
+
+ Directory of C:\GTools\tools\dc4w\test\f1
+
+02/12/2006  18:26    <DIR>          .
+02/12/2006  18:26    <DIR>          ..
+01/12/2006  01:29                29 text1.txt
+02/12/2006  18:26                 0 text3.txt
+               2 File(s)             29 bytes
+               2 Dir(s)  171,041,198,080 bytes free
